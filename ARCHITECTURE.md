@@ -209,6 +209,7 @@ features/dashboard/
 ### Riverpod Providers
 
 #### 1. Authentication Provider
+<<<<<<< Updated upstream
 ```dart
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>
 ```
@@ -236,6 +237,45 @@ final prayerTimeProvider = FutureProvider<PrayerTimes>
 ```dart
 final progressProvider = StateNotifierProvider<ProgressNotifier, ProgressState>
 ```
+=======
+
+```dart
+final authProvider = StateNotifierProvider<AuthNotifier, AuthState>
+```
+
+**Manages**: Login, signup, session, user profile
+
+#### 2. Daily Logs Provider
+
+```dart
+final dailyLogsProvider = StateNotifierProvider<DailyLogsNotifier, DailyLogsState>
+```
+
+**Manages**: Activity logging, date selection, sync status
+
+#### 3. AI Chat Provider
+
+```dart
+final aiChatProvider = StateNotifierProvider<AiChatNotifier, AiChatState>
+```
+
+**Manages**: Chat messages, AI responses, conversation history
+
+#### 4. Prayer Time Provider
+
+```dart
+final prayerTimeProvider = FutureProvider<PrayerTimes>
+```
+
+**Manages**: Prayer times fetching for current location
+
+#### 5. Progress Provider
+
+```dart
+final progressProvider = StateNotifierProvider<ProgressNotifier, ProgressState>
+```
+
+>>>>>>> Stashed changes
 **Manages**: Weekly/monthly statistics
 
 ### Selector Pattern for Optimization
@@ -332,6 +372,10 @@ ref.watch(dailyLogsProvider.select((state) => state.achievementPercentage));
 ### Hive Local Storage
 
 **Why Hive?**
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 - Type-safe (Dart objects, not JSON strings)
 - Fast (binary format)
 - Encrypted support
@@ -408,6 +452,7 @@ weekly_summary (RLS: Only own summaries)
 All tables have policies:
 
 ```sql
+<<<<<<< Updated upstream
 CREATE POLICY "Users can view own X" 
   ON table_name FOR SELECT 
   USING (auth.uid() = user_id);
@@ -422,6 +467,22 @@ CREATE POLICY "Users can update own X"
 
 CREATE POLICY "Users can delete own X" 
   ON table_name FOR DELETE 
+=======
+CREATE POLICY "Users can view own X"
+  ON table_name FOR SELECT
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can insert own X"
+  ON table_name FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update own X"
+  ON table_name FOR UPDATE
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete own X"
+  ON table_name FOR DELETE
+>>>>>>> Stashed changes
   USING (auth.uid() = user_id);
 ```
 
@@ -559,6 +620,10 @@ CREATE INDEX idx_activities_id ON activities(id);
 ## Conclusion
 
 This architecture provides:
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 - ✅ Scalability through modular design
 - ✅ Security through RLS and encryption
 - ✅ Reliability through error handling

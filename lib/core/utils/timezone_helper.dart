@@ -16,8 +16,13 @@ class TimezoneHelper {
     final wib = utc.add(wibOffset);
     // Return as non-UTC DateTime to prevent double conversion
     return DateTime(
-      wib.year, wib.month, wib.day,
-      wib.hour, wib.minute, wib.second, wib.millisecond,
+      wib.year,
+      wib.month,
+      wib.day,
+      wib.hour,
+      wib.minute,
+      wib.second,
+      wib.millisecond,
     );
   }
 
@@ -34,8 +39,13 @@ class TimezoneHelper {
     final wib = utc.add(wibOffset);
     // Return as non-UTC DateTime
     return DateTime(
-      wib.year, wib.month, wib.day,
-      wib.hour, wib.minute, wib.second, wib.millisecond,
+      wib.year,
+      wib.month,
+      wib.day,
+      wib.hour,
+      wib.minute,
+      wib.second,
+      wib.millisecond,
     );
   }
 
@@ -57,11 +67,12 @@ class TimezoneHelper {
     final now = nowWIB();
     final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
     final endOfWeek = startOfWeek.add(const Duration(days: 6));
-    
+
     final dateOnly = DateTime(date.year, date.month, date.day);
-    final startOnly = DateTime(startOfWeek.year, startOfWeek.month, startOfWeek.day);
+    final startOnly =
+        DateTime(startOfWeek.year, startOfWeek.month, startOfWeek.day);
     final endOnly = DateTime(endOfWeek.year, endOfWeek.month, endOfWeek.day);
-    
+
     return !dateOnly.isBefore(startOnly) && !dateOnly.isAfter(endOnly);
   }
 
@@ -112,7 +123,8 @@ class TimezoneHelper {
   }
 
   /// Format DateTime to WIB string with label
-  static String formatWIB(DateTime date, {String pattern = 'dd MMM yyyy HH:mm'}) {
+  static String formatWIB(DateTime date,
+      {String pattern = 'dd MMM yyyy HH:mm'}) {
     final wib = date.isUtc ? toWIB(date) : date;
     return '${DateFormat(pattern, 'id_ID').format(wib)} WIB';
   }

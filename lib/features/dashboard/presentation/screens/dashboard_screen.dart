@@ -97,7 +97,8 @@ class _DashboardBody extends ConsumerWidget {
         ],
       ),
       body: RefreshIndicator(
-        onRefresh: () => ref.read(dailyLogsProvider.notifier).refreshFromServer(),
+        onRefresh: () =>
+            ref.read(dailyLogsProvider.notifier).refreshFromServer(),
         child: CustomScrollView(
           slivers: [
             // Header dengan greeting
@@ -183,7 +184,7 @@ class _DashboardBody extends ConsumerWidget {
                     (context, index) {
                       final activity = activities[index];
                       final log = logsState.getLogByActivityId(activity.id);
-                      
+
                       return ActivityCard(
                         activity: activity,
                         currentValue: log?.value ?? 0,

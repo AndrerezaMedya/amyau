@@ -7,6 +7,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/constants/supabase_constants.dart';
 import 'core/theme/app_theme.dart';
+import 'core/services/env_service.dart';
 import 'core/services/local_storage_service.dart';
 import 'core/services/notification_service.dart';
 import 'features/auth/presentation/screens/login_screen.dart';
@@ -15,6 +16,13 @@ import 'providers/auth_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize environment variables FIRST
+  try {
+    await EnvService.initialize();
+  } catch (e) {
+    debugPrint('EnvService init error: $e');
+  }
 
   // Initialize locale
   try {

@@ -1,13 +1,15 @@
+import '../services/env_service.dart';
+
 /// Konfigurasi Gemini AI
+/// API Key dimuat dari .env file untuk security
 class GeminiConstants {
   GeminiConstants._();
 
   /// API Key untuk Gemini
-  /// Dapatkan dari: https://makersuite.google.com/app/apikey
-  static const String apiKey = 'AIzaSyCGcxYq7Z9SLVeLxkrQN19upCkNbAzOOyo';
+  static String get apiKey => EnvService.getRequired('GEMINI_API_KEY');
 
   /// Model yang digunakan
-  static const String modelId = 'gemini-3-flash-preview';
+  static const String modelId = 'gemini-2.0-flash';
 
   /// System prompt untuk AI Agent dengan awareness waktu sholat
   static const String systemPrompt = '''

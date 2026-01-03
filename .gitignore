@@ -75,8 +75,9 @@ app.*.map.json
 .env
 .env.local
 .env.*.local
-lib/core/constants/supabase_constants.dart
-!lib/core/constants/supabase_constants.dart.example
+.env.production
+.env.staging
+.env.development
 
 # ============= Generated Files =============
 lib/generated_plugin_registrant.dart

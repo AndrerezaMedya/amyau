@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/AndrerezaMedya/amyau?style=social)](https://github.com/AndrerezaMedya/amyau)
 
-A sophisticated Flutter application for tracking daily Islamic practices (*Mutabaah Yaumi*) with AI-powered mentoring and comprehensive progress analytics.
+A sophisticated Flutter application for tracking daily Islamic practices (_Mutabaah Yaumi_) with AI-powered mentoring and comprehensive progress analytics.
 
 [Features](#-features) • [Tech Stack](#-tech-stack) • [Setup](#-setup) • [Architecture](#-architecture) • [Contributing](#-contributing)
 
@@ -21,7 +21,7 @@ A sophisticated Flutter application for tracking daily Islamic practices (*Mutab
 **Amal Syarafi** is a production-ready mobile app designed for Islamic mentoring groups to track 12 daily spiritual activities with:
 
 - ✅ Real-time cloud synchronization via Supabase
-- 🤖 AI mentoring assistant powered by Google Gemini 2.0 Flash
+- 🤖 AI mentoring assistant powered by Google Gemini 3.0 Flash (preview)
 - 📊 Advanced analytics with weekly/monthly progress tracking
 - 🔐 Secure per-user data isolation with RLS policies
 - 🌐 Cross-platform support (Android, iOS, Web)
@@ -32,18 +32,21 @@ A sophisticated Flutter application for tracking daily Islamic practices (*Mutab
 ## ✨ Features
 
 ### Core Functionality
+
 - **12-Activity Dashboard** - Structured Islamic practices (Quran, Tahajud, Infaq, etc.)
 - **Smart Status Calculation** - Daily, Weekly, and Monthly evaluation periods
 - **Real-time Synchronization** - Offline-capable with auto-sync when connected
 - **Per-User Data Isolation** - Secure storage with RLS enforcement
 
 ### AI & Analytics
+
 - **Syeikh Syarafi AI Assistant** - Interactive chat for guidance and motivation
 - **Weekly Progress Reviews** - AI-generated summaries of achievements
 - **Visual Analytics** - Progress cards and monthly statistics
 - **Smart Notifications** - Context-aware prayer time reminders with WIB timezone
 
 ### Technical Features
+
 - **Multi-Device Sync** - Seamless data consistency across devices
 - **Secure Authentication** - Supabase Auth with email/password
 - **Offline Support** - Complete functionality without internet
@@ -53,15 +56,15 @@ A sophisticated Flutter application for tracking daily Islamic practices (*Mutab
 
 ## 🛠 Tech Stack
 
-| Category | Technology |
-|----------|-----------|
-| **Frontend** | Flutter 3.x, Material Design 3, Riverpod 2.4+ |
-| **Backend** | Supabase (PostgreSQL, Auth, RLS) |
-| **AI** | Google Gemini 2.0 Flash API |
-| **Local Storage** | Hive (encrypted, typed) |
-| **State Management** | Riverpod (reactive, typesafe) |
-| **APIs** | Aladhan (Prayer Times), Geocoding |
-| **Notifications** | flutter_local_notifications (Android 14+) |
+| Category             | Technology                                    |
+| -------------------- | --------------------------------------------- |
+| **Frontend**         | Flutter 3.x, Material Design 3, Riverpod 2.4+ |
+| **Backend**          | Supabase (PostgreSQL, Auth, RLS)              |
+| **AI**               | Google Gemini 2.0 Flash API                   |
+| **Local Storage**    | Hive (encrypted, typed)                       |
+| **State Management** | Riverpod (reactive, typesafe)                 |
+| **APIs**             | Aladhan (Prayer Times), Geocoding             |
+| **Notifications**    | flutter_local_notifications (Android 14+)     |
 
 ---
 
@@ -78,12 +81,14 @@ A sophisticated Flutter application for tracking daily Islamic practices (*Mutab
 ## 🚀 Setup Instructions
 
 ### 1. Clone Repository
+
 ```bash
 git clone https://github.com/AndrerezaMedya/amyau.git
 cd amyau
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 flutter pub get
 ```
@@ -91,18 +96,22 @@ flutter pub get
 ### 3. Configure Supabase
 
 #### a. Create Supabase Project
+
 1. Go to [supabase.com](https://supabase.com)
 2. Create new project
 3. Copy **Project URL** and **Anon Key**
 
 #### b. Run Database Schema
+
 ```bash
 # Copy schema.sql content and run in Supabase SQL Editor
 supabase/schema.sql
 ```
 
 #### c. Update Constants
+
 Create `lib/core/constants/supabase_constants.dart`:
+
 ```dart
 class SupabaseConstants {
   SupabaseConstants._();
@@ -119,6 +128,7 @@ class SupabaseConstants {
 ### 4. Configure Google Gemini API
 
 Create `lib/core/constants/gemini_constants.dart`:
+
 ```dart
 class GeminiConstants {
   GeminiConstants._();
@@ -129,6 +139,7 @@ class GeminiConstants {
 ```
 
 ### 5. Run Application
+
 ```bash
 # Web
 flutter run -d chrome
@@ -242,11 +253,13 @@ lib/
 ## 🔐 Security Features
 
 ### Data Isolation
+
 - **Per-User Hive Boxes**: Each user has isolated local storage with box names like `daily_logs_{userId}`
 - **RLS Policies**: Row-Level Security on all Supabase tables
 - **Auth Guards**: User verification before operations
 
 ### Synchronization
+
 - **Source of Truth**: Supabase is authoritative source
 - **Check-Then-Insert**: Prevents 409 conflicts
 - **Clean on Login**: Fresh fetch and local cache clearing
@@ -257,14 +270,16 @@ lib/
 ## 📊 Database Schema
 
 ### Tables
-| Table | Purpose | RLS |
-|-------|---------|-----|
-| `users` | User profiles & metadata | ✅ |
-| `activities` | 12 Islamic practices definition | ✅ |
-| `daily_logs` | Activity status per user per day | ✅ |
-| `weekly_summary` | AI-generated weekly reviews | ✅ |
+
+| Table            | Purpose                          | RLS |
+| ---------------- | -------------------------------- | --- |
+| `users`          | User profiles & metadata         | ✅  |
+| `activities`     | 12 Islamic practices definition  | ✅  |
+| `daily_logs`     | Activity status per user per day | ✅  |
+| `weekly_summary` | AI-generated weekly reviews      | ✅  |
 
 ### Key Constraints
+
 ```sql
 -- Unique daily log per user per activity per day
 UNIQUE(user_id, activity_id, date)
@@ -281,6 +296,7 @@ TRIGGER on_auth_user_created
 ## 🚢 Building & Deployment
 
 ### Build APK (Android Release)
+
 ```bash
 export JAVA_HOME="$ANDROID_STUDIO_HOME/jbr"
 flutter build apk --release
@@ -289,11 +305,13 @@ flutter build apk --release
 Output: `build/app/outputs/flutter-apk/app-release.apk`
 
 ### Build AAB (Google Play)
+
 ```bash
 flutter build appbundle --release
 ```
 
 ### Build Web
+
 ```bash
 flutter build web --release
 ```
@@ -305,17 +323,21 @@ flutter build web --release
 ### Common Issues
 
 **Foreign Key Constraint Error**
+
 ```
 PostgrestException: Key is not present in table "users"
 ```
-✅ *Solution*: App auto-creates user profile. Check trigger `handle_new_user()` is enabled.
+
+✅ _Solution_: App auto-creates user profile. Check trigger `handle_new_user()` is enabled.
 
 **Data Not Syncing**
+
 ```
 Check connectivity → Clear app cache → Restart
 ```
 
 **Notifications Not Working (Android 14+)**
+
 ```
 Verify android/app/build.gradle.kts has:
 - targetSdk >= 33
@@ -359,6 +381,7 @@ Contributions are welcome! Please follow these steps:
 5. **Open** Pull Request
 
 ### Code Style
+
 - Follow [Dart style guide](https://dart.dev/guides/language/effective-dart/style)
 - Run `dart format` before commit
 - Use `flutter analyze` for linting
@@ -374,6 +397,7 @@ This project is licensed under the **MIT License** - see [LICENSE](LICENSE) file
 ## 👤 Author
 
 **Andrez Medya**
+
 - GitHub: [@AndrerezaMedya](https://github.com/AndrerezaMedya)
 - Email: andrez@example.com
 
@@ -396,14 +420,15 @@ This project is licensed under the **MIT License** - see [LICENSE](LICENSE) file
 
 </div>
 
-│   │   └── ai_agent/
-│   │       └── presentation/screens/ai_chat_screen.dart
-│   └── progress/
-│       └── presentation/screens/progress_screen.dart
+│ │ └── ai_agent/
+│ │ └── presentation/screens/ai_chat_screen.dart
+│ └── progress/
+│ └── presentation/screens/progress_screen.dart
 └── shared/
-    └── utils/
-        └── status_calculator.dart
-```
+└── utils/
+└── status_calculator.dart
+
+````
 
 ## 📋 12 Aktivitas Yaumi
 
@@ -436,7 +461,7 @@ This project is licensed under the **MIT License** - see [LICENSE](LICENSE) file
 git clone <repo-url>
 cd mutabaah-yaumi
 flutter pub get
-```
+````
 
 ### 3. Konfigurasi Supabase
 
@@ -480,8 +505,8 @@ Karena registrasi private, admin perlu menambahkan user via Supabase Dashboard:
 
 ## 🔔 Jadwal Notifikasi
 
-| Waktu | Reminder |
-|-------|----------|
+| Waktu | Reminder                    |
+| ----- | --------------------------- |
 | 05:00 | Pengingat Tahajud & Tilawah |
 | 15:30 | Pengingat Al-Ma'tsurat Sore |
 | 21:00 | Evaluasi Harian & AI Review |
@@ -495,7 +520,7 @@ Karena registrasi private, admin perlu menambahkan user via Supabase Dashboard:
 
 ## 📱 Screenshots
 
-*Coming soon*
+_Coming soon_
 
 ## 🛠️ Tech Stack
 
